@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ExperimentalFarm
@@ -14,9 +15,23 @@ public class ExperimentalFarm
      */
     public Plot getHighestYield(String c)
     {
-        /* to be implemented in part (a) */
-
-        return null; // stub value
+        int max = 0;
+        Plot temp = null;
+        for (int row = 0; row < farmPlots.length; row++)
+        {
+            for (int col = 0; col < farmPlots[0].length; col++)
+            {
+                if (farmPlots[row][col].getCropType().equals(c))
+                {
+                    if(farmPlots[row][col].getCropYield() > max)
+                    {
+                        max = farmPlots[row][col].getCropYield();
+                        temp = farmPlots[row][col];
+                    }
+                }
+            }
+        }
+        return temp;
     }
 
     /** Returns true if all plots in a given column in
@@ -26,9 +41,15 @@ public class ExperimentalFarm
      */
     public boolean sameCrop(int col)
     {
-        /* to be implemented in part (b) */
-
-        return false; // stub value
+        String type = farmPlots[0][col].getCropType();
+        for (int i = 1; i < farmPlots.length; i++)
+        {
+            if (!farmPlots[i][col].getCropType().equals(type))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /** Returns an arraylist of Plots
@@ -37,8 +58,17 @@ public class ExperimentalFarm
      */
     public ArrayList<Plot> plotsWithCrop(String crop)
     {
-        /* to be implemented in part (c) */
-
-        return new ArrayList<Plot>(); // stub value
+        ArrayList<Plot> temp = new ArrayList<Plot>();
+        for (int i = 0; i < farmPlots.length; i++)
+        {
+            for (int j = 0; j < farmPlots[0].length; j++)
+            {
+                if (farmPlots[i][j].getCropType().equals(crop))
+                {
+                    temp.add(farmPlots[i][j]);
+                }
+            }
+        }
+        return temp;
     }
 }
